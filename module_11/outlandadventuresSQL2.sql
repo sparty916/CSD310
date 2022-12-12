@@ -136,7 +136,7 @@ CREATE TABLE supplyOrder (
 	supply_order_id	 		 INT             NOT NULL        AUTO_INCREMENT,
 	equipment_id			 INT		     NOT NULL,
     supply_order_quantity  	 INT		     NOT NULL,
-    supply_order_date	     VARCHAR(75)	 NOT NULL,
+    supply_order_date	     DATE			 NOT NULL,
     supplier_id	         	 INT     		 NOT NULL,	
     
     PRIMARY KEY(supply_order_id),
@@ -156,7 +156,7 @@ CREATE TABLE customerOrder (
 	customer_id				 		INT		     	NOT NULL,
 	equipment_id     		 		INT             NOT NULL,
     customer_equipment_quantity   	INT		        NOT NULL,
-    customer_order_date	     		VARCHAR(75)     NOT NULL,
+    customer_order_date	     		DATE		     NOT NULL,
     rented_or_bought	         	VARCHAR(75)     NOT NULL,	
     
     PRIMARY KEY(customer_order_id),
@@ -221,9 +221,7 @@ CREATE TABLE customerBooking (
 	customer_booking_id	 INT             NOT NULL        AUTO_INCREMENT,
 	customer_id			 INT			 NOT NULL,
 	trip_location_id     INT             NOT NULL,
-    -- INT or CARCHAR?
-    -- Dates as: 10/26 - 11/6 or October - November?
-    customer_trip_date   VARCHAR(75)    NOT NULL,
+    customer_trip_date   DATE		    NOT NULL,
     airfare_id		     INT     		NOT NULL,
     employee_id	         INT     		NOT NULL,
     
@@ -396,75 +394,75 @@ VALUES(675,  'Summer', (SELECT trip_location_id FROM trip_location WHERE trip_lo
 -- insert into customerOrder table
 INSERT INTO customerOrder(customer_id, equipment_id, customer_equipment_quantity, customer_order_date, rented_or_bought) 
 VALUES((SELECT customer_id FROM customer WHERE customer_id = '1'), (SELECT equipment_id FROM equipment WHERE equipment_id = '6'), 
-'1', '09/16/2020 ', 'RENT');
+'1', '2020/09/16 ', 'RENT');
 
 INSERT INTO customerOrder(customer_id, equipment_id, customer_equipment_quantity, customer_order_date, rented_or_bought) 
 VALUES((SELECT customer_id FROM customer WHERE customer_id = '2'), (SELECT equipment_id FROM equipment WHERE equipment_id = '5'), 
-'1', '5/15/2018 ', 'BUY');
+'1', '2018/05/15 ', 'BUY');
 
 INSERT INTO customerOrder(customer_id, equipment_id, customer_equipment_quantity, customer_order_date, rented_or_bought) 
 VALUES((SELECT customer_id FROM customer WHERE customer_id = '3'), (SELECT equipment_id FROM equipment WHERE equipment_id = '4'), 
-'2', '6/14/2022', 'RENT');
+'2', '2022/06/14', 'RENT');
 
 INSERT INTO customerOrder(customer_id, equipment_id, customer_equipment_quantity, customer_order_date, rented_or_bought) 
 VALUES((SELECT customer_id FROM customer WHERE customer_id = '4'), (SELECT equipment_id FROM equipment WHERE equipment_id = '3'), 
-'2 ', '2/13/2017', 'BUY');
+'2 ', '2017/02/13', 'BUY');
 
 INSERT INTO customerOrder(customer_id, equipment_id, customer_equipment_quantity, customer_order_date, rented_or_bought) 
 VALUES((SELECT customer_id FROM customer WHERE customer_id = '5'), (SELECT equipment_id FROM equipment WHERE equipment_id = '2'), 
-'1 ', '4/27/2021', 'RENT');
+'1 ', '2021/04/27', 'RENT');
 
 INSERT INTO customerOrder(customer_id, equipment_id, customer_equipment_quantity, customer_order_date, rented_or_bought) 
 VALUES((SELECT customer_id FROM customer WHERE customer_id = '6'), (SELECT equipment_id FROM equipment WHERE equipment_id = '1'), 
-'5', '11/15/2015', 'BUY');
+'5', '2015/11/15', 'BUY');
 
 -- insert into supplyOrder table
 INSERT INTO supplyOrder (equipment_id, supply_order_quantity, supply_order_date, supplier_id)
-VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '1'), '4', '02/19/2022', 
+VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '1'), '4', '2022/02/19', 
 (SELECT supplier_id FROM supplier WHERE supplier_id = '3 '));
 
 INSERT INTO supplyOrder (equipment_id, supply_order_quantity, supply_order_date, supplier_id)
-VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '2'), '6', '07/07/2015', 
+VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '2'), '6', '2015/07/07', 
 (SELECT supplier_id FROM supplier WHERE supplier_id = '5'));
 
 INSERT INTO supplyOrder (equipment_id, supply_order_quantity, supply_order_date, supplier_id)
-VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '3'), '9', '04/12/2017', 
+VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '3'), '9', '2017/04/12', 
 (SELECT supplier_id FROM supplier WHERE supplier_id = '2'));
 
 INSERT INTO supplyOrder (equipment_id, supply_order_quantity, supply_order_date, supplier_id)
-VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '4'), '1', '12/03/2021', 
+VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '4'), '1', '2021/12/03', 
 (SELECT supplier_id FROM supplier WHERE supplier_id = '1'));
 
 INSERT INTO supplyOrder (equipment_id, supply_order_quantity, supply_order_date, supplier_id)
-VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '5'), '15', '04/15/2016', 
+VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '5'), '15', '2016/04/15', 
 (SELECT supplier_id FROM supplier WHERE supplier_id = '6'));
 
 INSERT INTO supplyOrder (equipment_id, supply_order_quantity, supply_order_date, supplier_id)
-VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '6'), '25', '10/31/2020', 
+VALUES ((SELECT equipment_id FROM equipment WHERE equipment_id = '6'), '25', '2020/10/31', 
 (SELECT supplier_id FROM supplier WHERE supplier_id = '4'));
 
 -- insert into customerBooking table
 INSERT INTO customerBooking (customer_id, trip_location_id, customer_trip_date, airfare_id, employee_id)
 VALUES ((SELECT customer_id FROM customer WHERE customer_id = '1'), (SELECT trip_location_id FROM trip_location WHERE trip_location_id = '3'), 
-'09/09/2023', (SELECT airfare_id FROM airfare WHERE airfare_id = '5'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
+'2023/09/09', (SELECT airfare_id FROM airfare WHERE airfare_id = '5'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
 
 INSERT INTO customerBooking (customer_id, trip_location_id, customer_trip_date, airfare_id, employee_id)
 VALUES ((SELECT customer_id FROM customer WHERE customer_id = '2'), (SELECT trip_location_id FROM trip_location WHERE trip_location_id = '2'), 
-'12/15/2022', (SELECT airfare_id FROM airfare WHERE airfare_id = '2'), (SELECT employee_id FROM employee WHERE employee_id = '4'));
+'2022/12/15', (SELECT airfare_id FROM airfare WHERE airfare_id = '2'), (SELECT employee_id FROM employee WHERE employee_id = '4'));
 
 INSERT INTO customerBooking (customer_id, trip_location_id, customer_trip_date, airfare_id, employee_id)
 VALUES ((SELECT customer_id FROM customer WHERE customer_id = '3'), (SELECT trip_location_id FROM trip_location WHERE trip_location_id = '1'), 
-'06/25/2020', (SELECT airfare_id FROM airfare WHERE airfare_id = '6'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
+'2020/06/25', (SELECT airfare_id FROM airfare WHERE airfare_id = '6'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
 
 INSERT INTO customerBooking (customer_id, trip_location_id, customer_trip_date, airfare_id, employee_id)
 VALUES ((SELECT customer_id FROM customer WHERE customer_id = '4'), (SELECT trip_location_id FROM trip_location WHERE trip_location_id = '2'), 
-'04/18/2019', (SELECT airfare_id FROM airfare WHERE airfare_id = '4'), (SELECT employee_id FROM employee WHERE employee_id = '4'));
+'2019/04/18', (SELECT airfare_id FROM airfare WHERE airfare_id = '4'), (SELECT employee_id FROM employee WHERE employee_id = '4'));
 
 INSERT INTO customerBooking (customer_id, trip_location_id, customer_trip_date, airfare_id, employee_id)
 VALUES ((SELECT customer_id FROM customer WHERE customer_id = '5'), (SELECT trip_location_id FROM trip_location WHERE trip_location_id = '3'), 
-'10/25/2021', (SELECT airfare_id FROM airfare WHERE airfare_id = '5'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
+'2021/10/25', (SELECT airfare_id FROM airfare WHERE airfare_id = '5'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
 
 INSERT INTO customerBooking (customer_id, trip_location_id, customer_trip_date, airfare_id, employee_id)
 VALUES ((SELECT customer_id FROM customer WHERE customer_id = '6'), (SELECT trip_location_id FROM trip_location WHERE trip_location_id = '2'), 
-'01/17/2020', (SELECT airfare_id FROM airfare WHERE airfare_id = '2'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
+'2020/01/17', (SELECT airfare_id FROM airfare WHERE airfare_id = '2'), (SELECT employee_id FROM employee WHERE employee_id = '3'));
 

@@ -4,6 +4,7 @@
 # Professor: Professor Sampson
 # Date: December 4, 2022
 # Description: Outland Adventures python file to display items in tables
+# UPDATED: 12/6/2022
 
 import mysql.connector
 
@@ -103,9 +104,9 @@ cursor.execute('SELECT * FROM equipment')
 equipment = cursor.fetchall()
 
 for equipment in equipment:
-    print("Equipment ID: {}\nEquipment Name: {}\nRental Price: {}\nPurchase Price: {}\nQuantity: {}\n".format(
+    print("Equipment ID: {}\nEquipment Name: {}\nUnit Price: {}\nRental Price: {}\nPurchase Price: {}\nQuantity: {}\n".format(
         equipment[0],
-        equipment[1], equipment[2], equipment[3], equipment[4]))
+        equipment[1], equipment[2], equipment[3], equipment[4], equipment[5]))
 
 # print out inoculations table
 print("--DISPLAYING inoculations RECORDS--")
@@ -143,9 +144,8 @@ cursor.execute('SELECT * FROM supplyOrder')
 supplyOrder = cursor.fetchall()
 
 for supplyOrder in supplyOrder:
-    print("Equipment Order ID: {}\nEquipment ID: {}\nUnit Price: {}\nQuantity Ordered: {}\nOrdered On: {}\nOrdered From"
-          ": {}\n".format(supplyOrder[0], supplyOrder[1], supplyOrder[2], supplyOrder[3], supplyOrder[4],
-                          supplyOrder[5]))
+    print("Equipment Order ID: {}\nEquipment ID: {}\nQuantity Ordered: {}\nOrdered On: {}\nOrdered From"
+          ": {}\n".format(supplyOrder[0], supplyOrder[1], supplyOrder[2], supplyOrder[3], supplyOrder[4]))
 
 # print out trip_location table
 print("--DISPLAYING trip_location RECORDS--")
